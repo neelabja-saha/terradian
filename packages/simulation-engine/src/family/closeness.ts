@@ -1,4 +1,4 @@
-import type { RelationshipType } from "@terradian/shared";
+import type { PersonalityTraits, RelationshipType } from "@terradian/shared";
 import type { Rng } from "../rng.js";
 import { clamp } from "../util.js";
 
@@ -11,17 +11,28 @@ const BASE_CLOSENESS: Record<RelationshipType, number> = {
   grandfather: 60,
 };
 
+/** Points of closeness per trait point away from the midpoint (50). */
+const AGREEABLENESS_WEIGHT = 0.3;
+const NEUROTICISM_WEIGHT = 0.2;
+const NOISE_RANGE = 10;
+
 /**
- * Closeness as perceived by `fromAgreeableness`'s owner looking at the other
- * person. Higher agreeableness raises how close someone feels to their
- * family; a small random component keeps results varied but bounded.
+ * Closeness (0-100) as felt by the person with `fromPersonality` towards a
+ * family member. Agreeableness raises it, neuroticism lowers it, and a small
+ * random component keeps results varied but bounded. Always draws exactly
+ * one rng value.
  */
 export function computeCloseness(
   relationshipType: RelationshipType,
-  fromAgreeableness: number,
+  fromPersonality: PersonalityTraits,
   rng: Rng,
 ): number {
-  const agreeablenessBonus = (fromAgreeableness - 50) * 0.3;
-  const noise = rng.nextInt(-10, 10);
-  return clamp(Math.round(BASE_CLOSENESS[relationshipType] + agreeablenessBonus + noise), 0, 100);
+  const agreeablenessBonus = (fromPersonality.agreeableness - 50) * AGREEABLENESS_WEIGHT;
+  const neuroticismPenalty = (fromPersonality.neuroticism - 50) * NEUROTICISM_WEIGHT;
+  const noise = rng.nextInt(-NOISE_RANGE, NOISE_RANGE);
+  return clamp(
+    Math.round(BASE_CLOSENESS[relationshipType] + agreeablenessBonus - neuroticismPenalty + noise),
+    0,
+    100,
+  );
 }

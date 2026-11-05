@@ -1,0 +1,22 @@
+{
+  "default": {
+    "male": ["Alex", "Sam", "Jordan", "Chris", "Morgan", "Taylor", "Robin", "Casey"],
+    "female": ["Alex", "Sam", "Jordan", "Chris", "Morgan", "Taylor", "Robin", "Casey"],
+    "surnames": ["Rivers", "Stone", "Hale", "Fields", "Brooks", "Shaw"]
+  },
+  "USA": {
+    "male": ["James", "Michael", "David", "Robert", "William", "Daniel", "Joseph", "Thomas"],
+    "female": ["Mary", "Jennifer", "Linda", "Patricia", "Elizabeth", "Susan", "Sarah", "Karen"],
+    "surnames": ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller"]
+  },
+  "India": {
+    "male": ["Arjun", "Rohan", "Vikram", "Aditya", "Karan", "Rahul", "Sourav", "Amit"],
+    "female": ["Priya", "Ananya", "Divya", "Neha", "Pooja", "Kavita", "Ritu", "Meera"],
+    "surnames": ["Sharma", "Patel", "Iyer", "Reddy", "Gupta", "Nair"]
+  },
+  "UK": {
+    "male": ["Oliver", "George", "Harry", "Jack", "Charlie", "Thomas", "Henry", "Arthur"],
+    "female": ["Olivia", "Amelia", "Isla", "Ava", "Emily", "Sophie", "Grace", "Lily"],
+    "surnames": ["Taylor", "Wilson", "Evans", "Thomas", "Roberts", "Walker"]
+  }
+}
