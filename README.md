@@ -52,14 +52,14 @@ flowchart LR
 
 ## 📦 Package Status
 
-| Package                      | Status         | Contents                                                                                    |
-| ---------------------------- | -------------- | ------------------------------------------------------------------------------------------- |
-| `packages/shared`            | 🟢 Active      | Terrestrial, Family and (placeholder) event types                                           |
-| `packages/simulation-engine` | 🟡 In progress | Seeded RNG, Terrestrial creation (module 1, done), family generator (module 2, in progress) |
-| `packages/mcp-server`        | ⚪ Planned     | Module 8                                                                                    |
-| `packages/api-server`        | ⚪ Planned     | Modules 14-16                                                                               |
-| `packages/web-client`        | ⚪ Planned     | Modules 17-18                                                                               |
-| `packages/realtime-server`   | ⚪ Planned     | Module 22                                                                                   |
+| Package                      | Status         | Contents                                                                 |
+| ---------------------------- | -------------- | ------------------------------------------------------------------------ |
+| `packages/shared`            | 🟢 Active      | Terrestrial, Family and (placeholder) event types                        |
+| `packages/simulation-engine` | 🟡 In progress | Seeded RNG, Terrestrial creation (module 1), family generator (module 2) |
+| `packages/mcp-server`        | ⚪ Planned     | Module 8                                                                 |
+| `packages/api-server`        | ⚪ Planned     | Modules 14-16                                                            |
+| `packages/web-client`        | ⚪ Planned     | Modules 17-18                                                            |
+| `packages/realtime-server`   | ⚪ Planned     | Module 22                                                                |
 
 ---
 

@@ -8,16 +8,16 @@
 
 ## Phase 1 — Core simulation
 
-| #   | Module                                | Package           | Status                                                                          |
-| --- | ------------------------------------- | ----------------- | ------------------------------------------------------------------------------- |
-| 1   | Terrestrial                           | simulation-engine | ✅                                                                              |
-| 2   | Family generator                      | simulation-engine | 🟡 Code written; neuroticism in closeness, names as data, and tests still to do |
-| 3   | Life-stage state machine              | simulation-engine | ⚪                                                                              |
-| 4   | Life events: definitions and resolver | simulation-engine | ⚪                                                                              |
-| 5   | World clock and tick engine           | simulation-engine | ⚪                                                                              |
-| 6   | Family NPC simulation                 | simulation-engine | ⚪                                                                              |
-| 7   | CLI game loop                         | simulation-engine | ⚪                                                                              |
-| 8   | MCP server v1                         | mcp-server        | ⚪                                                                              |
+| #   | Module                                | Package           | Status |
+| --- | ------------------------------------- | ----------------- | ------ |
+| 1   | Terrestrial                           | simulation-engine | ✅     |
+| 2   | Family generator                      | simulation-engine | ✅     |
+| 3   | Life-stage state machine              | simulation-engine | ⚪     |
+| 4   | Life events: definitions and resolver | simulation-engine | ⚪     |
+| 5   | World clock and tick engine           | simulation-engine | ⚪     |
+| 6   | Family NPC simulation                 | simulation-engine | ⚪     |
+| 7   | CLI game loop                         | simulation-engine | ⚪     |
+| 8   | MCP server v1                         | mcp-server        | ⚪     |
 
 **Phase goal:** a full life can be simulated headlessly, played in the terminal, and played by Claude through MCP.
 

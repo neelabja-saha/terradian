@@ -65,7 +65,10 @@ packages/simulation-engine/src/
 └── family/
     ├── family.ts          # generateFamily
     ├── closeness.ts       # directed closeness edges
-    └── name-data.ts       # names by country with fallback
+    └── name-data.ts       # loads and validates data/names.json
+
+packages/simulation-engine/data/
+└── names.json             # first names and surnames by country, plus "default"
 ```
 
 ### Creating a Terrestrial

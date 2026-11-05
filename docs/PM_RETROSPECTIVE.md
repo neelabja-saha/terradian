@@ -139,6 +139,77 @@ Deferred to module 3, where the state machine will define the canonical stage li
 Git on this machine converts LF to CRLF on checkout, while Prettier expects LF. A fresh checkout could fail `format:check`.
 
 **Decision:**
-Pending. Proposed fix: a `.gitattributes` with `* text=auto eol=lf`.
+Added `.gitattributes` with `* text=auto eol=lf`, so every checkout keeps LF regardless of local Git settings.
 
-**Priority:** Low, but cheap to fix.
+**Files Affected:** `.gitattributes`
+
+---
+
+## Entry 11 — Neuroticism Lowers Family Closeness
+
+**Observation:**
+The spec says agreeableness raises closeness and neuroticism lowers it. Only agreeableness was used.
+
+**Decision:**
+`computeCloseness` now takes the whole personality: +0.3 per agreeableness point above 50, -0.2 per neuroticism point above 50, plus noise of ±10, clamped to 0-100. It still draws exactly one rng value, which a test asserts.
+
+**Why This Matters:**
+Personality should visibly shape relationships from day one, and the module 4 event weights will build on the same idea.
+
+**Files Affected:** `packages/simulation-engine/src/family/closeness.ts`
+
+---
+
+## Entry 12 — Name Lists Moved to a Validated Data File
+
+**Observation:**
+Names were a TypeScript constant, against the rule that content lives in data files.
+
+**Decision:**
+Names now live in `data/names.json`, keyed by country with a required `default` set. `parseNameData` validates the file when it loads and names the exact bad entry (for example `"India.female[3]" must be a non-empty string`). Lists grew from 6 to 8 first names per gender.
+
+**Why This Matters:**
+Adding a country is now a data change. Validation at load time means a typo fails immediately instead of producing a nameless character mid-game. This is the pattern module 4's event files will follow.
+
+**Files Affected:** `packages/simulation-engine/data/names.json`, `packages/simulation-engine/src/family/name-data.ts`
+
+---
+
+## Entry 13 — Plausible Family Ages and Deceased Relatives
+
+**Observation:**
+Reviewing the generator showed three implausible outcomes:
+
+- An older sibling could be born when the mother was 8 (sibling 12 years older, mother only 20 years older).
+- An 80-year-old Terrestrial could have living parents aged 120 and grandparents of 150.
+- A newborn's younger siblings were clamped to "born today", producing same-day siblings.
+
+**Decision:**
+Age rules are now explicit in `FAMILY_AGE_RULES`:
+
+- Sibling gaps are limited so both parents are at least 18, and the mother at most 45, at every birth. Younger siblings are never born after the current day.
+- Parents older than 100 are generated with `isAlive: false`. They stay in the family because they still matter to the story.
+- All four grandparents are rolled, only living ones (100 or under) are kept, and 0-2 of those are chosen.
+
+**Why This Matters:**
+Module 6 will age and kill NPCs from this starting point, so the starting family has to be believable for players of any age.
+
+**Files Affected:** `packages/simulation-engine/src/family/family.ts`
+
+**Future Enhancement:**
+A probabilistic death roll for elderly relatives (instead of a hard 100-year cutoff) belongs with module 5's mortality model.
+
+---
+
+## Entry 14 — Family Surname and Unique First Names
+
+**Observation:**
+The family surname was rolled independently, so "Asha Rao" could get the "Sharma" family. First names could repeat inside one family.
+
+**Decision:**
+The family takes the Terrestrial's surname (last word of the name). A surname is only rolled when the Terrestrial has a single name, and it is always drawn so rng use stays the same either way. First names avoid repeats, including the Terrestrial's own, when the list has enough names.
+
+**Files Affected:** `packages/simulation-engine/src/family/family.ts`
+
+**Future Enhancement:**
+Maternal grandparents currently share the family surname. Separate maternal and paternal surnames could come with marriages in module 6.
